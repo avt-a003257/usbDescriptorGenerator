@@ -1,82 +1,9 @@
 # usbDescriptorGenerator
 
-usbDescriptorGenerator is a project continuing Frank Jeschke's USBDescriptorKitchen. 
+usbDescriptorGenerator is a project continuing Frank Jeschke's USBDescriptorKitchen. The original project is available at https://github.com/zonque/USBDescriptorKitchen.git.
 
-== ABOUT
+# ABOUT
 usbDescriptorGenerator is a GUI-driven tool that helps developers of USB firmwares to ease the pain of calculating lengths of descriptors, fiddling with bits, dealing with variable length fields etc.
 
 It is written in wxPython and works well on Linux, Mac OS X, and Windows.
 
-== HOW TO USE
-
-Run the program with "python MainWindow.py". It will show a simple GUI with
-a tree of available descriptors on the left side and a detailed view of the
-selected descriptor in the right side.
-
-To add a descriptor, right-click on the descriptor in the left-hand tree view
-which should be the parent of the new descriptor. The menu will only offer you
-valid descriptor types which are allowed to be children of the selected parent.
-The second option in this context menu is to remove a descriptor.
-
-Lines in the detail view have different colors to distinguish different types
-of descriptor elements:
-
-  BLACK - constant values and automatically calculated fields.
-          Non-editable.
-  BLUE  - links and enumerated fields. Left-click on the "Value" column
-          to get a menu of possible values for enumerations or links to
-          other entities, respectively.
-  RED   - variable content. Left-click on the "Value" column to open a
-          text editor field.
-
-There are also two types of array elements. The first one are arrays which
-have their length denoted in one descriptor field. To vary the number of
-array members, modify this field.
-
-The other array type implicitly counts the number of its array members
-with the all-over descriptor lengths. For this type, right-click on one
-member to add or remove an element from the list.
-
-On some "variable" elements, a right click will offer a context menu for
-suggested values. As an example, the address field of an endpoint
-descriptor can be chosen from a list of addresses which are not yet taken
-by other endpoints in the same configuration.
-
-You can save the descriptor set to a file or dump it to stdout at any time.
-
-The only output format currently supported is as plain C header file, and the
-tool is also able to read back the file and reconstruct the descriptors from
-the C structs. The important detail here is that indentation is taken into
-account, so be sure to keep it in order when editing manually.
-
-
-== DESCRIPTOR TEMPLATES
-
-There are some descriptor templates available, and they suffice to build
-USB audio devices. But there are certainly many missing. Have a look at
-Templates/ to see how to create new ones.
-
-
-== CHECKS
-
-A framework for sanity checks exists which should grow every time a common
-problem with descriptor sets is found that can be avoided in the future.
-However, there is only one check at the moment for the time being, and it
-mostly acts as prove of concept and as explanations of how to write more
-complex checks.
-
-
-== BUGS
-
-Eventually, the read-back of descriptor sets should not rely on the indentation
-but do a full content parse, just like any USB stack also does.
-
-There are possibly some bugs left, and definitely the list of supported
-descriptors is incomplete. Feedback helping to improve things is always
-welcome, preferrably in the form of proper git patches.
-
-There is currently no mailing list to discuss issues around this tool.
-In case of any collaborative work you want to share, contact the author
-of this tool directly:
-
-	usb (at) zonque (dot) org
